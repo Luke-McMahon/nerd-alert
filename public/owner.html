@@ -18,8 +18,10 @@
 		// Identify yourself as the owner
 		socket.emit('identify', 'owner');
 
-		socket.on('play sound', () => {
+		socket.on('play sound', (soundFile) => {
+			const filepath = '/assets/sounds/' + soundFile + '.mp3';
 			const audio = document.getElementById('sound');
+			audio.src = filepath;
 			audio.play();
 		});
 	</script>

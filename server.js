@@ -17,10 +17,15 @@ io.on('connection', (socket) => {
 		}
 	});
 
-	socket.on('play sound', () => {
-		if (ownerSocketId) {
-			io.to(ownerSocketId).emit('play sound');
-			console.log(`Sond play requested by ${socket.id}`);
+	socket.on('play sound', (soundFile) => {
+		const allowedSounds = ['this-guy-stinks', 'homer-simpson-nerd', 'regular-yawn', 'quit-boring-everyone'];
+		if (allowedSounds.includes(soundFile)) {
+			if (ownerSocketId) {
+				console.log(`Play sound requested by ${socket.id}: ${soundFile}`);
+				io.to(ownerSocketId).emit('play sound', soundFile);
+			}
+		} else {
+			console.log(`Invalid sound file requested: ${soundFile}`);
 		}
 	});
 

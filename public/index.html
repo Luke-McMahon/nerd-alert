@@ -9,14 +9,22 @@
 
 <body>
 	<h1>Visitor Page</h1>
-	<button id="playButton">Play Sound on Owner's Site</button>
+	<button class="play-sound-button" data-sound="this-guy-stinks">this guy stinks</button>
+	<button class="play-sound-button" data-sound="homer-simpson-nerd">nerd</button>
+	<button class="play-sound-button" data-sound="regular-yawn">yawn</button>
+	<button class="play-sound-button" data-sound="quit-boring-everyone">quit boring everyone</button>
 	<script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
 	<script>
 		const socket = io();
 
-		document.getElementById('playButton').addEventListener('click', () => {
-			socket.emit('play sound');
-		});
+		const buttons = document.querySelectorAll('.play-sound-button');
+
+		buttons.forEach(button => {
+			button.addEventListener('click', () => {
+				const soundFile = button.getAttribute('data-sound');
+				socket.emit('play sound', soundFile);
+			});
+		})
 	</script>
 </body>
 
