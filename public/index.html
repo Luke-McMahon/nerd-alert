@@ -4,15 +4,69 @@
 
 <head>
 	<meta charset="UTF-8">
-	<title>Visitor Page</title>
+	<title>Shut Luke Up</title>
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+			margin: 0;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			height: 100vh;
+			background-color: #f5f5f5;
+		}
+
+		.container {
+			text-align: center;
+		}
+
+		.center {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 10px;
+			margin-top: 20px;
+			justify-content: center;
+			max-width: 600px;
+		}
+
+		.play-sound-button {
+			background-color: #007bff;
+			color: white;
+			border: none;
+			padding: 10px 20px;
+			font-size: 16px;
+			border-radius: 5px;
+			cursor: pointer;
+			transition: background-color 0.3s;
+			width: 150px;
+		}
+
+		.play-sound-button:hover {
+			background-color: #0056b3;
+		}
+
+		.play-sound-button:disabled {
+			background-color: gray;
+			cursor: not-allowed;
+			opacity: 0.6;
+		}
+	</style>
 </head>
 
 <body>
-	<h1>Visitor Page</h1>
-	<button class="play-sound-button" data-sound="this-guy-stinks">this guy stinks</button>
-	<button class="play-sound-button" data-sound="homer-simpson-nerd">nerd</button>
-	<button class="play-sound-button" data-sound="regular-yawn">yawn</button>
-	<button class="play-sound-button" data-sound="quit-boring-everyone">quit boring everyone</button>
+	<div class="container">
+		<h1>Shut Luke Up</h1>
+		<div class="center">
+			<button class="play-sound-button" data-sound="this-guy-stinks">this guy stinks</button>
+			<button class="play-sound-button" data-sound="homer-simpson-nerd">nerd</button>
+			<button class="play-sound-button" data-sound="regular-yawn">yawn</button>
+			<button class="play-sound-button" data-sound="quit-boring-everyone">quit boring everyone</button>
+			<button class="play-sound-button" data-sound="no-god">no god</button>
+			<button class="play-sound-button" data-sound="killin-me">you're killin me</button>
+			<button class="play-sound-button" data-sound="why">WHY</button>
+			<button class="play-sound-button" data-sound="blah">blah</button>
+		</div>
+	</div>
 	<script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
 	<script>
 		const socket = io();
@@ -23,6 +77,11 @@
 			button.addEventListener('click', () => {
 				const soundFile = button.getAttribute('data-sound');
 				socket.emit('play sound', soundFile);
+
+				button.disabled = true;
+				setTimeout(() => {
+					button.disabled = false;
+				}, 500);
 			});
 		})
 	</script>

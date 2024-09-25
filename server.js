@@ -18,7 +18,10 @@ io.on('connection', (socket) => {
 	});
 
 	socket.on('play sound', (soundFile) => {
-		const allowedSounds = ['this-guy-stinks', 'homer-simpson-nerd', 'regular-yawn', 'quit-boring-everyone'];
+		const allowedSounds = [
+			'this-guy-stinks', 'homer-simpson-nerd', 'regular-yawn', 'quit-boring-everyone',
+			'killin-me', 'why', 'blah', 'no-god'
+		];
 		if (allowedSounds.includes(soundFile)) {
 			if (ownerSocketId) {
 				console.log(`Play sound requested by ${socket.id}: ${soundFile}`);
